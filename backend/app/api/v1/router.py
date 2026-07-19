@@ -1,8 +1,8 @@
+
 from fastapi import APIRouter
+
+from backend.app.api.v1.users import router as users_router
 
 router = APIRouter()
 
-
-@router.get("/")
-def api_root():
-    return {"message": "FinVerse API v1"}
+router.include_router(users_router)
