@@ -1,0 +1,18 @@
+from backend.app.repositories.user_repository import UserRepository
+from backend.app.schemas.user import UserCreate
+
+
+class UserService:
+    def __init__(self, repository: UserRepository):
+        self.repository = repository
+
+    def create_user(self, user: UserCreate):
+        existing_user = self.repository.get_by_email(user.email)
+
+        if existing_user:
+            raise ValueError("Email already registered")
+
+        return self.repository.create(user)
+
+    def get_user(self, user_id: int):
+        return self.repository.get_by_id(user_id)
