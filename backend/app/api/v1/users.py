@@ -4,8 +4,13 @@ from sqlalchemy.orm import Session
 
 from backend.app.database.session import get_db
 from backend.app.repositories.user_repository import UserRepository
-from backend.app.schemas.user import UserCreate, UserResponse
 from backend.app.services.user_service import UserService
+from backend.app.schemas.user import (
+    UserCreate,
+    UserResponse,
+    UserUpdate,
+)
+
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -45,5 +50,20 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 
     try:
         service.delete_user(user_id)
+    except ValueError:
+        raise HTTPException(status_code=404, detail="User not found")
+
+
+@router.put("/{user_id}", response_model=UserResponse)
+def update_user(
+    user_id: int,
+    user: UserUpdate,
+    db: Session = Depends(get_db),
+):
+    repository = UserRepository(db)
+    service = UserService(repository)
+
+    try:
+        return service.update_user(user_id, user)
     except ValueError:
         raise HTTPException(status_code=404, detail="User not found")

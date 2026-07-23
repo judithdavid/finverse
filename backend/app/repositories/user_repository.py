@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from backend.app.models.user import User
-from backend.app.schemas.user import UserCreate
+from backend.app.schemas.user import UserCreate, UserUpdate
 
 
 class UserRepository:
@@ -20,6 +20,15 @@ class UserRepository:
         self.db.refresh(db_user)
 
         return db_user
+
+    def update(self, user: User, user_data: UserUpdate):
+        user.full_name = user_data.full_name
+
+        self.db.commit()
+        self.db.refresh(user)
+
+        return user
+
 
     def get_by_email(self, email: str):
         return (

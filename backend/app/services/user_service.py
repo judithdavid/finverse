@@ -1,5 +1,5 @@
 from backend.app.repositories.user_repository import UserRepository
-from backend.app.schemas.user import UserCreate
+from backend.app.schemas.user import UserCreate, UserUpdate
 
 
 class UserService:
@@ -13,6 +13,14 @@ class UserService:
             raise ValueError("Email already registered")
 
         return self.repository.create(user)
+    
+    def update_user(self, user_id: int, user_data: UserUpdate):
+        user = self.repository.get_by_id(user_id)
+
+        if user is None:
+            raise ValueError("User not found")
+
+        return self.repository.update(user, user_data)
 
     def get_user(self, user_id: int):
         return self.repository.get_by_id(user_id)
