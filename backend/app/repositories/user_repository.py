@@ -34,3 +34,6 @@ class UserRepository:
             .filter(User.id == user_id)
             .first()
         )
+    
+    def get_all(self):
+        return self.db.query(User).all()
