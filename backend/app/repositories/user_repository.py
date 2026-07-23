@@ -37,3 +37,8 @@ class UserRepository:
     
     def get_all(self):
         return self.db.query(User).all()
+
+    def delete(self, user: User):
+        self.db.delete(user)
+        self.db.commit()
+

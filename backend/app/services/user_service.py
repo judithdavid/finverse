@@ -19,3 +19,12 @@ class UserService:
 
     def get_all_users(self):
         return self.repository.get_all()
+
+    def delete_user(self, user_id: int):
+        user = self.repository.get_by_id(user_id)
+
+        if user is None:
+            raise ValueError("User not found")
+
+        self.repository.delete(user)
+

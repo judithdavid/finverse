@@ -37,3 +37,13 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
 
     return user
+
+@router.delete("/{user_id}", status_code=204)
+def delete_user(user_id: int, db: Session = Depends(get_db)):
+    repository = UserRepository(db)
+    service = UserService(repository)
+
+    try:
+        service.delete_user(user_id)
+    except ValueError:
+        raise HTTPException(status_code=404, detail="User not found")
