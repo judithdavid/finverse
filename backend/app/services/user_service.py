@@ -1,5 +1,6 @@
 from backend.app.repositories.user_repository import UserRepository
 from backend.app.schemas.user import UserCreate, UserUpdate
+from backend.app.core.security import hash_password
 
 
 class UserService:
@@ -12,7 +13,9 @@ class UserService:
         if existing_user:
             raise ValueError("Email already registered")
 
-        return self.repository.create(user)
+        password_hash = hash_password(user.password)
+        
+        return self.repository.create(user,password_hash)
     
     def update_user(self, user_id: int, user_data: UserUpdate):
         user = self.repository.get_by_id(user_id)
