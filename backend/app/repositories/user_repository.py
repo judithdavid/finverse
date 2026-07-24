@@ -51,3 +51,10 @@ class UserRepository:
         self.db.delete(user)
         self.db.commit()
 
+    def authenticate(self, email: str):
+        return (
+            self.db.query(User)
+            .filter(User.email == email)
+            .first()
+        )
+

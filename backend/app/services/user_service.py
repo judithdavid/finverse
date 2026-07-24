@@ -1,6 +1,9 @@
 from backend.app.repositories.user_repository import UserRepository
 from backend.app.schemas.user import UserCreate, UserUpdate
-from backend.app.core.security import hash_password
+from backend.app.core.security import (
+    hash_password,
+    verify_password,
+)
 
 
 class UserService:
@@ -38,4 +41,16 @@ class UserService:
             raise ValueError("User not found")
 
         self.repository.delete(user)
+
+    def authenticate_user(self, email: str, password: str):
+        user = self.repository.authenticate(email)
+
+        if user is None:
+            return None
+
+        if not verify_password(password, user.password_hash):
+            return None
+
+        return user
+
 
