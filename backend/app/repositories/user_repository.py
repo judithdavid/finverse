@@ -8,11 +8,11 @@ class UserRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def create(self, user: UserCreate) -> User:
+    def create(self, user: UserCreate, password_hash: str) -> User:
         db_user = User(
             email=user.email,
             full_name=user.full_name,
-            password_hash=user.password,
+            password_hash=password_hash,
         )
 
         self.db.add(db_user)
@@ -50,4 +50,11 @@ class UserRepository:
     def delete(self, user: User):
         self.db.delete(user)
         self.db.commit()
+
+    def authenticate(self, email: str):
+        return (
+            self.db.query(User)
+            .filter(User.email == email)
+            .first()
+        )
 

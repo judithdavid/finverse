@@ -1,5 +1,9 @@
 from backend.app.repositories.user_repository import UserRepository
 from backend.app.schemas.user import UserCreate, UserUpdate
+from backend.app.core.security import (
+    hash_password,
+    verify_password,
+)
 
 
 class UserService:
@@ -12,7 +16,9 @@ class UserService:
         if existing_user:
             raise ValueError("Email already registered")
 
-        return self.repository.create(user)
+        password_hash = hash_password(user.password)
+        
+        return self.repository.create(user,password_hash)
     
     def update_user(self, user_id: int, user_data: UserUpdate):
         user = self.repository.get_by_id(user_id)
@@ -35,4 +41,16 @@ class UserService:
             raise ValueError("User not found")
 
         self.repository.delete(user)
+
+    def authenticate_user(self, email: str, password: str):
+        user = self.repository.authenticate(email)
+
+        if user is None:
+            return None
+
+        if not verify_password(password, user.password_hash):
+            return None
+
+        return user
+
 

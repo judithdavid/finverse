@@ -13,6 +13,15 @@ class UserCreate(UserBase):
 class UserUpdate(BaseModel):
     full_name: str
 
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
 class UserResponse(UserBase):
     id: int
     is_active: bool
