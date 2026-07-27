@@ -5,10 +5,13 @@ from sqlalchemy.orm import Session
 from backend.app.database.session import get_db
 from backend.app.repositories.user_repository import UserRepository
 from backend.app.services.user_service import UserService
+from backend.app.core.security import create_access_token
 from backend.app.schemas.user import (
     UserCreate,
+    UserLogin,
     UserResponse,
     UserUpdate,
+    Token,
 )
 
 
@@ -23,6 +26,32 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         return service.create_user(user)
     except ValueError as e:
         raise HTTPException(status_code=409, detail=str(e))
+
+@router.post("/login", response_model=Token)
+def login(user: UserLogin, db: Session = Depends(get_db)):
+    repository = UserRepository(db)
+    service = UserService(repository)
+
+    authenticated_user = service.authenticate_user(
+        user.email,
+        user.password,
+    )
+
+    if authenticated_user is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password",
+        )
+
+    access_token = create_access_token(
+        {"sub": authenticated_user.email}
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+    }
+
 
 @router.get("/", response_model=list[UserResponse])
 def get_users(db: Session = Depends(get_db)):
