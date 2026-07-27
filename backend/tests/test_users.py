@@ -67,3 +67,30 @@ def test_create_user_invalid_email():
     )
 
     assert response.status_code == 422
+
+def test_login():
+    email = f"{uuid4()}@example.com"
+
+    user = {
+        "email": email,
+        "full_name": "Login Test",
+        "password": "password123",
+    }
+
+    create_response = client.post("/api/v1/users/", json=user)
+    assert create_response.status_code == 201
+
+    login_response = client.post(
+        "/api/v1/users/login",
+        json={
+            "email": email,
+            "password": "password123",
+        },
+    )
+
+    assert login_response.status_code == 200
+
+    data = login_response.json()
+
+    assert "access_token" in data
+    assert data["token_type"] == "bearer"
