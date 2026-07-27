@@ -126,3 +126,26 @@ def test_get_current_user():
 
     assert response.status_code == 200
     assert response.json()["email"] == email
+
+def test_login_invalid_password():
+    email = f"{uuid4()}@example.com"
+
+    user = {
+        "email": email,
+        "full_name": "Invalid Login",
+        "password": "password123",
+    }
+
+    create_response = client.post("/api/v1/users/", json=user)
+    assert create_response.status_code == 201
+
+    login_response = client.post(
+        "/api/v1/users/login",
+        json={
+            "email": email,
+            "password": "wrongpassword",
+        },
+    )
+
+    assert login_response.status_code == 401
+    assert login_response.json()["detail"] == "Invalid email or password"
