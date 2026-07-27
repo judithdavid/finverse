@@ -6,6 +6,9 @@ from jose import jwt
 
 from backend.app.core.config import SECRET_KEY
 
+from fastapi import HTTPException
+from jose import JWTError
+
 pwd_context = CryptContext(
     schemes=["bcrypt"],
     deprecated="auto",
@@ -41,3 +44,27 @@ def create_access_token(data: dict) -> str:
         SECRET_KEY,
         algorithm=ALGORITHM,
     )
+
+def verify_access_token(token: str) -> str:
+    try:
+        payload = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM],
+        )
+
+        email = payload.get("sub")
+
+        if email is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid token",
+            )
+
+        return email
+
+    except JWTError:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token",
+        )
