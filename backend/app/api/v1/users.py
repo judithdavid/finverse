@@ -14,6 +14,9 @@ from backend.app.schemas.user import (
     Token,
 )
 
+from backend.app.api.dependencies import get_current_user
+from backend.app.models.user import User
+
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -52,6 +55,11 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer",
     }
 
+@router.get("/me", response_model=UserResponse)
+def get_current_logged_in_user(
+    current_user: User = Depends(get_current_user),
+):
+    return current_user
 
 @router.get("/", response_model=list[UserResponse])
 def get_users(db: Session = Depends(get_db)):
