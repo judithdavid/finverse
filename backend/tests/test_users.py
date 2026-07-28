@@ -149,3 +149,9 @@ def test_login_invalid_password():
 
     assert login_response.status_code == 401
     assert login_response.json()["detail"] == "Invalid email or password"
+
+def test_get_current_user_without_token():
+    response = client.get("/api/v1/users/me")
+
+    assert response.status_code ==  401
+
