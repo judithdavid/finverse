@@ -7,6 +7,7 @@ from .user import (
     UserLogin,
     Token,
 )
+from .wallet import WalletCreate, WalletResponse
 
 __all__ = [
     "UserBase",
