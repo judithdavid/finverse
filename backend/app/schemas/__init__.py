@@ -11,6 +11,7 @@ from .wallet import WalletCreate, WalletResponse
 from .transaction import TransactionCreate, TransactionResponse
 from .category import CategoryCreate, CategoryResponse
 from .budget import BudgetCreate, BudgetResponse
+from .dashboard import DashboardResponse
 
 
 __all__ = [
