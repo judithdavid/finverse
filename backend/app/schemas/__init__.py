@@ -9,6 +9,7 @@ from .user import (
 )
 from .wallet import WalletCreate, WalletResponse
 from .transaction import TransactionCreate, TransactionResponse
+from .category import CategoryCreate, CategoryResponse
 
 
 __all__ = [
