@@ -8,6 +8,8 @@ from .user import (
     Token,
 )
 from .wallet import WalletCreate, WalletResponse
+from .transaction import TransactionCreate, TransactionResponse
+
 
 __all__ = [
     "UserBase",
