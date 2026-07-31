@@ -12,6 +12,7 @@ from .transaction import TransactionCreate, TransactionResponse
 from .category import CategoryCreate, CategoryResponse
 from .budget import BudgetCreate, BudgetResponse
 from .dashboard import DashboardResponse
+from .savings_goal import SavingsGoalCreate, SavingsGoalResponse
 
 
 __all__ = [
