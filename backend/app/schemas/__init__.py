@@ -15,6 +15,7 @@ from .dashboard import DashboardResponse
 from .savings_goal import SavingsGoalCreate, SavingsGoalResponse
 from .bill import BillCreate, BillResponse
 from .investment import InvestmentCreate, InvestmentResponse
+from .loan import LoanCreate, LoanResponse
 
 
 __all__ = [
