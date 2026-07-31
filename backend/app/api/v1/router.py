@@ -10,6 +10,7 @@ from backend.app.api.v1.dashboard import router as dashboard_router
 from backend.app.api.v1.savings_goals import (
     router as savings_goals_router,
 )
+from backend.app.api.v1.bills import router as bills_router
 
 router = APIRouter()
 
@@ -20,3 +21,4 @@ router.include_router(categories_router)
 router.include_router(budgets_router)
 router.include_router(dashboard_router)
 router.include_router(savings_goals_router)
+router.include_router(bills_router)
