@@ -4,6 +4,8 @@ from .transaction import Transaction
 from .category import Category
 from .budget import Budget
 from .savings_goal import SavingsGoal
+from .bill import Bill
+
 
 __all__ = ["User"]
 
