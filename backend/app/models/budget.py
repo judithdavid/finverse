@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey, Numeric
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
+from decimal import Decimal
 from backend.app.database.base import Base
 
 
@@ -8,7 +8,8 @@ class Budget(Base):
     __tablename__ = "budgets"
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    amount: Mapped[float] = mapped_column(Numeric(12, 2))
+    # amount: Mapped[float] = mapped_column(Numeric(12, 2))
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
 
     category_id: Mapped[int] = mapped_column(
         ForeignKey("categories.id")

@@ -1,4 +1,6 @@
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Numeric
+from decimal import Decimal
+
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.app.database.base import Base
@@ -9,8 +11,11 @@ class Loan(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     lender: Mapped[str]
-    amount: Mapped[float]
-    remaining_amount: Mapped[float]
+    # amount: Mapped[float]
+    # remaining_amount: Mapped[float]
     interest_rate: Mapped[float]
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+    remaining_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2))
+
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))

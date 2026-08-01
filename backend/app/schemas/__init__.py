@@ -20,7 +20,7 @@ from .report import ReportResponse
 from .spending_by_category import CategorySpending
 from .monthly_report import MonthlyReport
 from .cash_flow import CashFlowResponse
-
+from .financial_summary import FinancialSummaryResponse
 
 __all__ = [
     "UserBase",
