@@ -17,6 +17,7 @@ from .bill import BillCreate, BillResponse
 from .investment import InvestmentCreate, InvestmentResponse
 from .loan import LoanCreate, LoanResponse
 from .report import ReportResponse
+from .spending_by_category import CategorySpending
 
 
 __all__ = [
