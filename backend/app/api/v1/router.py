@@ -16,6 +16,9 @@ from backend.app.api.v1.investments import (
 )
 from backend.app.api.v1.loans import router as loans_router
 from backend.app.api.v1.reports import router as reports_router
+from backend.app.api.v1.spending_by_category import (
+    router as spending_by_category_router,
+)
 
 
 
@@ -32,3 +35,4 @@ router.include_router(bills_router)
 router.include_router(investments_router)
 router.include_router(loans_router)
 router.include_router(reports_router)
+router.include_router(spending_by_category_router)
