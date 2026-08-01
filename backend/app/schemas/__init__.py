@@ -19,6 +19,7 @@ from .loan import LoanCreate, LoanResponse
 from .report import ReportResponse
 from .spending_by_category import CategorySpending
 from .monthly_report import MonthlyReport
+from .cash_flow import CashFlowResponse
 
 
 __all__ = [
