@@ -20,6 +20,10 @@ from backend.app.api.v1.spending_by_category import (
     router as spending_by_category_router,
 )
 
+from backend.app.api.v1.monthly_report import (
+    router as monthly_report_router,
+)
+
 
 
 router = APIRouter()
@@ -36,3 +40,4 @@ router.include_router(investments_router)
 router.include_router(loans_router)
 router.include_router(reports_router)
 router.include_router(spending_by_category_router)
+router.include_router(monthly_report_router)
