@@ -28,10 +28,14 @@ def upgrade() -> None:
     sa.Column('transaction_type', sa.String(length=20), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('wallet_id', sa.Integer(), nullable=False),
+    sa.Column('category_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['wallet_id'], ['wallets.id'], ),
+    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_transactions_id'), 'transactions', ['id'], unique=False)
+
+
     # ### end Alembic commands ###
 
 

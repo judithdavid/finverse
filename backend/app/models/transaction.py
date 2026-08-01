@@ -16,5 +16,5 @@ class Transaction(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     wallet_id: Mapped[int] = mapped_column(ForeignKey("wallets.id"))
-
+    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
     wallet = relationship("Wallet")
