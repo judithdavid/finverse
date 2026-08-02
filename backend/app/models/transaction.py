@@ -21,6 +21,4 @@ class Transaction(Base):
     wallet_id: Mapped[int] = mapped_column(ForeignKey("wallets.id"))
     # category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
     category_id: Mapped[Optional[int]] = mapped_column(ForeignKey("categories.id"),nullable=True,)
-
-
     wallet = relationship("Wallet")
