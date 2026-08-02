@@ -23,6 +23,7 @@ from .cash_flow import CashFlowResponse
 from .financial_summary import FinancialSummaryResponse
 from .search import TransactionSearchResponse
 from .filter import TransactionFilter
+from .pagination import PaginationParams
 
 
 __all__ = [
