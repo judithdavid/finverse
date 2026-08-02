@@ -8,6 +8,7 @@ from .bill import Bill
 from .investment import Investment
 from .loan import Loan
 from .recurring_transaction import RecurringTransaction
+from .notification import Notification
 
 
 __all__ = ["User"]
