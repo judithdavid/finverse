@@ -6,6 +6,10 @@ from slowapi.middleware import SlowAPIMiddleware
 
 from backend.app.core.rate_limit import limiter
 
+from fastapi.middleware.cors import CORSMiddleware
+from backend.app.core.cors import CORS_SETTINGS
+
+
 app = FastAPI(
     title=APP_NAME,
     version=APP_VERSION,
@@ -14,6 +18,11 @@ app = FastAPI(
 app.include_router(router, prefix="/api/v1", tags=["API"])
 app.state.limiter = limiter
 app.add_middleware(SlowAPIMiddleware)
+app.add_middleware(
+    CORSMiddleware,
+    **CORS_SETTINGS,
+)
+
 
 
 @app.get("/")
