@@ -16,12 +16,18 @@ from backend.app.schemas.user import (
 
 from backend.app.api.dependencies import get_current_user
 from backend.app.models.user import User
+from fastapi import Request
+
+from backend.app.core.rate_limit import limiter
 
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
+
+
 @router.post("/", response_model=UserResponse, status_code=201)
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
+@limiter.limit("10/minute")
+def create_user(request: Request, user: UserCreate, db: Session = Depends(get_db)):
     repository = UserRepository(db)
     service = UserService(repository)
 
@@ -104,3 +110,5 @@ def update_user(
         return service.update_user(user_id, user)
     except ValueError:
         raise HTTPException(status_code=404, detail="User not found")
+
+
