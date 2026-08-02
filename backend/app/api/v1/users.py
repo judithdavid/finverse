@@ -26,8 +26,8 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.post("/", response_model=UserResponse, status_code=201)
-@limiter.limit("10/minute")
-def create_user(request: Request, user: UserCreate, db: Session = Depends(get_db)):
+# @limiter.limit("10/minute")
+def create_user( request: Request, user: UserCreate, db: Session = Depends(get_db)):
     repository = UserRepository(db)
     service = UserService(repository)
 
@@ -37,6 +37,7 @@ def create_user(request: Request, user: UserCreate, db: Session = Depends(get_db
         raise HTTPException(status_code=409, detail=str(e))
 
 @router.post("/login", response_model=Token)
+@limiter.limit("10/minute")
 def login(user: UserLogin, db: Session = Depends(get_db)):
     repository = UserRepository(db)
     service = UserService(repository)
