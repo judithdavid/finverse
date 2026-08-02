@@ -7,6 +7,7 @@ from .savings_goal import SavingsGoal
 from .bill import Bill
 from .investment import Investment
 from .loan import Loan
+from .recurring_transaction import RecurringTransaction
 
 
 __all__ = ["User"]
