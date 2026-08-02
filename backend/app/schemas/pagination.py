@@ -6,3 +6,4 @@ class PaginationParams(BaseModel):
     page_size: int = 10
     sort_by: str = "id"
     order: str = "asc"
+    
