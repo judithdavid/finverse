@@ -43,6 +43,9 @@ from backend.app.api.v1.notifications import (
 from backend.app.api.v1.token import (
     router as token_router,
 )
+from backend.app.api.v1.health import (
+    router as health_router,
+)
 
 
 router = APIRouter()
@@ -68,3 +71,5 @@ router.include_router(pagination_router)
 router.include_router(recurring_transactions_router)
 router.include_router(notifications_router)
 router.include_router(token_router)
+router.include_router(health_router)
+
