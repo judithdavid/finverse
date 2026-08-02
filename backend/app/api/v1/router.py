@@ -29,6 +29,7 @@ from backend.app.api.v1.cash_flow import (
 from backend.app.api.v1.financial_summary import (
     router as financial_summary_router,
 )
+from backend.app.api.v1.search import router as search_router
 
 
 router = APIRouter()
@@ -48,3 +49,4 @@ router.include_router(spending_by_category_router)
 router.include_router(monthly_report_router)
 router.include_router(cash_flow_router)
 router.include_router(financial_summary_router)
+router.include_router(search_router)
