@@ -40,6 +40,10 @@ from backend.app.api.v1.recurring_transactions import (
 from backend.app.api.v1.notifications import (
     router as notifications_router,
 )
+from backend.app.api.v1.token import (
+    router as token_router,
+)
+
 
 router = APIRouter()
 
@@ -63,3 +67,4 @@ router.include_router(filter_router)
 router.include_router(pagination_router)
 router.include_router(recurring_transactions_router)
 router.include_router(notifications_router)
+router.include_router(token_router)
