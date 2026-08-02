@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from backend.app.core.config import APP_NAME, APP_VERSION
 from backend.app.api.v1.router import router
-# from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from backend.app.core.rate_limit import limiter
@@ -12,6 +11,8 @@ from backend.app.core.cors import CORS_SETTINGS
 from backend.app.core.exceptions import (
     register_exception_handlers,
 )
+
+from backend.app.core.logging import logger
 
 
 
@@ -29,6 +30,7 @@ app.add_middleware(
     **CORS_SETTINGS,
 )
 
+logger.info("FinVerse API started successfully")
 
 
 @app.get("/")
