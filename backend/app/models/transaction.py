@@ -5,6 +5,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.app.database.base import Base
 
+from typing import Optional
+
 
 class Transaction(Base):
     __tablename__ = "transactions"
@@ -17,5 +19,6 @@ class Transaction(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     wallet_id: Mapped[int] = mapped_column(ForeignKey("wallets.id"))
-    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
+    # category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"))
+    category_id: Mapped[Optional[int]] = mapped_column(ForeignKey("categories.id"),nullable=True,)
     wallet = relationship("Wallet")

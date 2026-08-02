@@ -24,6 +24,10 @@ from .financial_summary import FinancialSummaryResponse
 from .search import TransactionSearchResponse
 from .filter import TransactionFilter
 from .pagination import PaginationParams
+from .recurring_transaction import (
+    RecurringTransactionCreate,
+    RecurringTransactionResponse,
+)
 
 
 __all__ = [
