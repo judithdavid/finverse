@@ -34,7 +34,9 @@ from backend.app.api.v1.filter import router as filter_router
 from backend.app.api.v1.pagination import (
     router as pagination_router,
 )
-
+from backend.app.api.v1.recurring_transactions import (
+    router as recurring_transactions_router,
+)
 
 router = APIRouter()
 
@@ -56,3 +58,5 @@ router.include_router(financial_summary_router)
 router.include_router(search_router)
 router.include_router(filter_router)
 router.include_router(pagination_router)
+router.include_router(recurring_transactions_router)
+
