@@ -28,6 +28,10 @@ from .recurring_transaction import (
     RecurringTransactionCreate,
     RecurringTransactionResponse,
 )
+from .notification import (
+    NotificationCreate,
+    NotificationResponse,
+)
 
 
 __all__ = [
